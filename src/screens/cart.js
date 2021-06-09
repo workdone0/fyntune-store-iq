@@ -12,21 +12,21 @@ export default function Cart() {
   const [redirectToCheckout, setredirectToCheckout] = useState(false);
 
   const onCartUpdate = async (product, qty) => {
-    var User = user;
+    var User = { ...user };
     var NPro = User.cart.filter((item) => item.id !== product.id);
     var Upro = product;
     Upro.quantity = qty !== "" ? Number(qty) : 0;
     NPro.push(Upro);
     User.cart = NPro;
     dispatch({ type: "SET_CURRENT_USER", payload: { user: User } });
-    console.log(User);
     setUser(User);
+    console.log(user);
   };
-
   if (redirectToCheckout) {
     return <Redirect to="/checkout" />;
   }
   var total = 0;
+
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "center", padding: "2%" }}>
