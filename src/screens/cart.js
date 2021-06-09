@@ -13,11 +13,8 @@ export default function Cart() {
 
   const onCartUpdate = async (product, qty) => {
     var User = { ...user };
-    var NPro = User.cart.filter((item) => item.id !== product.id);
-    var Upro = product;
-    Upro.quantity = qty !== "" ? Number(qty) : 0;
-    NPro.push(Upro);
-    User.cart = NPro;
+    var indx = User.cart.findIndex((item) => item.id === product.id);
+    User.cart[indx].quantity = qty !== "" ? Number(qty) : 0;
     dispatch({ type: "SET_CURRENT_USER", payload: { user: User } });
     setUser(User);
     console.log(user);
